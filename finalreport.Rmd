@@ -1,8 +1,11 @@
 ---
-title: "Untitled"
+title: "EDA On IPL"
 output: rmarkdown::github_document
 ---
 
+```{r global_options}
+knitr::opts_chunk$set(fig.path='Figs/')
+```
 
 
 SIVAPRASAD PR
