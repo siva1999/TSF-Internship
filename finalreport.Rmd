@@ -1,8 +1,11 @@
 ---
-title: "Untitled"
+title: "Exploratory Data Analysis On IPL"
 output: rmarkdown::github_document
 ---
 
+```{r global_options}
+knitr::opts_chunk$set(fig.path='Figs/')
+```
 
 
 SIVAPRASAD PR
@@ -114,6 +117,7 @@ from the analysis the probability of match played in home and away grounds are a
 ggplot(matches,aes(winner))+geom_bar(fill="brown")+theme(axis.text.x = element_text(angle = 90,))+xlab("Teams")+ylab("Number of matches won")+ggtitle("Total No of matches won by each team")
 
 ```
+
 from the bar plot we can analyze that team MI,CSK and KKR are among the top three teams. 
 
 4)Number of matches lost by each team in IPL
@@ -127,6 +131,7 @@ losec<-data.frame(losec)
 names(losec)<-c("team","count")
 ggplot(losec,aes(x=team,y=count))+geom_bar(stat="identity")+theme(axis.text.x = element_text(angle=90))+ylab("No of matches Lost")+ggtitle("NO OF MATCHES LOST BY EACH TEAM")
 ```
+
 5) Win By Runs 
 
 ```{r}
@@ -165,6 +170,7 @@ Now let's analyze the data set del.
 del %>% group_by(batsman)%>% summarise(runs=sum(batsman_runs))%>% arrange(desc(runs))%>% filter(runs > 3000)%>%ggplot(aes(reorder(batsman,+runs),y=runs,fill=batsman))+geom_bar(stat="identity")+theme(axis.text.x = element_text(angle=90))+xlab("Batsman")+ylab("runs scored")+ggtitle("Top batsman with score > 3000")+guides(fill=F)
 
 ```
+
 9) TOP BOWLERS
 
 ```{r}
@@ -179,6 +185,7 @@ colnames(matches)[1]<- "match_id"
 del %>% left_join(matches) %>% filter(batsman=="V Kohli"| batsman=="SK Raina" |batsman=="RG Sharma") %>% filter(result == "normal") %>%
   group_by(batsman,match_id,batting_team,winner) %>%  summarise(Runs=sum(batsman_runs)) %>% ggplot(aes(match_id,Runs))+geom_line()+geom_smooth()+facet_wrap(~batsman)+ggtitle("CONTRIBUTIONS OF TOP BATSMAN FOR THIER TEAM ")
 ```
+
 11) Contributions of top batsman for winning and losing
 
 ```{r}
